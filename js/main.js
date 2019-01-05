@@ -1,4 +1,5 @@
 import { App } from './app.js';
+import Protos from './prototypes.js';
 
 const root = document.getElementById('root');
 
