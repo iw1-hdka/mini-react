@@ -1,33 +1,38 @@
 import * as Protos from './prototypes.js';
-import { Component } from './component.js';
+import { Player, Fighter } from './mario.js';
 import { createElement as h, render } from './miniDOM.js';
-
-const Title = (props) => h('h2', props, props.children);
-
-class Counter extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {value: 0};
-    }
-
-    onPlusClick() {
-        this.setState({value: this.state.value + 1});
-    }
-
-    render() {
-        return h('div', null,
-            h('div', null, '{{ state.value }}'.interpolate(this)),
-            h('button', {onClick: this.onPlusClick.bind(this)}, '+'),
-        );
-    }
-}
+import {Component} from './component.js';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            mario: new Fighter('Mario', 50),
+            luigi: new Fighter('Luigi', 50)
+        };
+
+        this.onHit.bind(this);
+    }
+
+    onHit(target, damage) {
+        const oldEnemy = this.state[target];
+        const enemy = new Fighter(oldEnemy.name, oldEnemy.life, oldEnemy.damage);
+        this.setState({
+            ...this.state,
+            [target]: enemy.onHit(damage)
+        });
+    }
+
     render() {
-        return h('div', null,
-            h(Title, null, 'Super compteur !'),
-            h(Counter)
-        )
+        const { mario, luigi } = this.state;
+        return h(
+            'div',
+            null,
+            h(Player, {fighter: mario, onHit: (damage) => this.onHit('luigi', damage)}),
+            h('hr'),
+            h(Player, {fighter: luigi, onHit: (damage) => this.onHit('mario', damage)})
+        );
     }
 }
 
