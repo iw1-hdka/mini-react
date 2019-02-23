@@ -1,6 +1,16 @@
 "use strict";
 
 import {createElement as h, render, Component} from './component.js';
+import Home from "./views/pages/Home.js";
+import About from "./views/pages/About.js";
+import Error404 from "./views/pages/Error404.js";
+import PostShow from "./views/pages/PostShow.js";
+import Register from "./views/pages/Register.js";
+
+import Navbar from "./views/components/Navbar.js";
+import Bottombar from "./views/components/Bottombar.js";
+
+import Utils from "./services/Utils.js";
 
 const Title = (props) => h('h2', props, props.children);
 
@@ -24,25 +34,13 @@ class Counter extends Component {
 
 class App extends Component {
     render() {
-        return h('div', null,
-            h(Title, null, 'Super compteur !'),
-            h(Counter)
-        )
+        return h(Navbar)// h('div', null,
+            // h(Title, null, 'Super compteur !'),
+            // h(Counter))
     }
 }
 
 render(App, document.getElementById('root'));
-
-import Home from "./views/pages/Home.js";
-import About from "./views/pages/About.js";
-import Error404 from "./views/pages/Error404.js";
-import PostShow from "./views/pages/PostShow.js";
-import Register from "./views/pages/Register.js";
-
-import Navbar from "./views/components/Navbar.js";
-import Bottombar from "./views/components/Bottombar.js";
-
-import Utils from "./services/Utils.js";
 
 // List of supported routes. Any url other than these routes will throw a 404 error
 const routes = {
