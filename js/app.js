@@ -1,17 +1,21 @@
 "use strict";
 
 import { createElement as h, render, Component } from "./component.js";
+import Router from "./router.js";
+import { routes } from "./routes.js";
 
-import Header from "./views/components/Header.js";
-import Page from "./router.js";
-import Footer from "./views/components/Footer.js";
-
+var router = new Router(routes)
 class App extends Component {
   render() {
-    return h("div", null, h(Header), h(Page), h(Footer));
+    return h(router.load())
   }
 }
-let app = render(App, document.getElementById("root"));
+
+// App entry point
+let app = () => {
+  render(App, document.getElementById("root"));
+}
+
 // Listen on hash change:
 window.addEventListener("hashchange", app);
 

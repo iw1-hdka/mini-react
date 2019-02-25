@@ -48,7 +48,7 @@ class Home extends Component {
           h(
             "div",
             { className: "articles" },
-            ...posts.slice(0, 1).map(post =>
+            ...posts.slice(0, 10).map(post =>
               h(
                 "div",
                 { className: "article" },
