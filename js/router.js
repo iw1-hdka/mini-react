@@ -1,7 +1,6 @@
 "use strict";
 import Utils from "./services/Utils.js";
 import Error404 from "./views/pages/Error404.js";
-import { routes } from "./routes.js";
 
 export default class Router {
   constructor(routes) {
@@ -27,5 +26,13 @@ export default class Router {
     // Get the page from our hash of supported routes.
     // If the parsed URL is not in our list of supported routes, select the 404 page instead
     return routes[parsedURL] ? routes[parsedURL] : Error404;
+  }
+
+  listen(app) {
+    // Listen on hash change:
+    window.addEventListener("hashchange", app);
+
+    // Listen on page load:
+    window.addEventListener("load", app);
   }
 }
