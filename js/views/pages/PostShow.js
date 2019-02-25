@@ -57,7 +57,8 @@ class PostShow extends Component {
             h("p", null, post.body)
           ),
           h(
-            "a", {
+            "a",
+            {
               href: "/#/"
             },
             "Retour aux articles"
