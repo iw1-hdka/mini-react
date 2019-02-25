@@ -1,12 +1,15 @@
-let Error404 = {
-  render: async () => {
-    let view = /*html*/ `
-            <section class="section">
-                <h1> 404 Error </h1>
-            </section>
-        `;
-    return view;
-  },
-  after_render: async () => {}
-};
+import { createElement as h, render, Component } from "../../component.js";
+
+class Error404 extends Component {
+  render() {
+    return h(
+      "section",
+      {
+        className: "section"
+      },
+      h("h1", null, "Cette page n'existe pas")
+    );
+  }
+}
+
 export default Error404;

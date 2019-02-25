@@ -1,6 +1,6 @@
 import { createElement as h, render, Component } from "../../component.js";
 
-class Navbar extends Component {
+class Header extends Component {
   constructor(props) {
     super(props);
   }
@@ -16,14 +16,9 @@ class Navbar extends Component {
         "h5",
         { className: "my-0 mr-md-auto font-weight-normal" },
         h("a", { href: "/#/" }, "Projet JS")
-      ),
-      h(
-        "a",
-        { className: "btn btn-outline-primary", href: "/#/register" },
-        "S'enregistrer"
       )
     );
   }
 }
 
-export default Navbar;
+export default Header;
