@@ -1,27 +1,30 @@
-export function handleClass(clazz, props, children) {
-    const reactElement = new (clazz)(props);
-    reactElement.children = children;
+import { isStateLessComponent, isClass } from './utils.js';
 
-    return renderReactElement(reactElement);
-}
+let vDOM;
 
 function appendProp(domElement, key, value) {
+    const allowedDOMAttributes = ['checked', 'value', 'className', 'max'];
+    // Handle DOM events
     if (typeof value === 'function' && key.startsWith('on')) {
         domElement.addEventListener(key.substring(2).toLowerCase(), value);
-    } else if (key === 'checked' || key === 'value' || key === 'className') {
+    }
+    // Add DOM Attributes
+    else if (allowedDOMAttributes.includes(key)) {
         domElement[key] = value;
-    } else if (key === 'style' && typeof value === 'object') {
+    }
+    // Add `style` attribute of the DOM Element
+    else if (key === 'style' && typeof value === 'object') {
         Object.assign(domElement.style, value);
-    } else if (key === 'key') {
-        domElement.id = value
-    } else if (typeof value !== 'object' && typeof value !== 'function') {
-        domElement.setAttribute(key, value);
+    }
+    // Set unique key of element as id
+    else if (key === 'key') {
+        domElement.id = value;
     }
 }
 
-export function createDOM(vDOM, root) {
+function createDOM(vDOM, root) {
     if (Array.isArray(vDOM)) {
-        vDOM.forEach(child => root.appendChild(document.createTextNode(child)))
+        vDOM.forEach(child => createDOM(child, root));
     } else if (typeof vDOM === 'object') {
         const element = document.createElement(vDOM.type);
         root.appendChild(element);
@@ -38,7 +41,7 @@ export function createDOM(vDOM, root) {
     }
 }
 
-export function renderReactElement(element) {
+function renderReactElement(element) {
     const domEl = element.render();
     domEl.props = {
         key: element.props.key,
@@ -46,4 +49,34 @@ export function renderReactElement(element) {
     };
 
     return domEl;
+}
+
+export const createElement = (element, props = null, ...children) => {
+    if (isClass(element)) {
+        const reactElement = new (element)(props);
+        reactElement.children = children;
+
+        return renderReactElement(reactElement);
+    }
+    if (isStateLessComponent(element)) {
+        return element({...props, children});
+    }
+
+    return {type: element, props, children};
+};
+
+export const render = (element, domElement) => {
+    vDOM = createElement(element);
+    createDOM(vDOM, domElement);
+};
+
+export function reRender(element) {
+    const key = element.props.key;
+    const domEl = document.getElementById(key);
+    const parent = domEl.parentNode;
+
+    parent.removeChild(domEl);
+    vDOM = renderReactElement(element);
+
+    createDOM(vDOM, parent);
 }
