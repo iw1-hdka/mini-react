@@ -1,5 +1,4 @@
-"use strict";
-import Utils from "./services/Utils.js";
+import {parseRequestURL} from "./services/utils.js";
 import Error404 from "./views/pages/Error404.js";
 
 export default class Router {
@@ -8,14 +7,18 @@ export default class Router {
   }
 
   load() {
-    document.getElementById("root").innerHTML = "";
+    const root = document.getElementById("root");
+    while (root.hasChildNodes()) {
+      root.removeChild(root.lastChild);
+    }
+
     return this.getCurrentComponent();
   }
 
   // The router code. Takes a URL, checks against the list of supported routes and then renders the corresponding content page.
   getCurrentComponent() {
     // Get the parsed URl from the addressbar
-    let request = Utils.parseRequestURL();
+    let request = parseRequestURL(location.hash.slice(1));
 
     // Parse the URL and if it has an id part, change it with the string ":id"
     let parsedURL =
@@ -25,7 +28,7 @@ export default class Router {
 
     // Get the page from our hash of supported routes.
     // If the parsed URL is not in our list of supported routes, select the 404 page instead
-    return routes[parsedURL] ? routes[parsedURL] : Error404;
+    return this.routes[parsedURL] ? this.routes[parsedURL] : Error404;
   }
 
   listen(app) {

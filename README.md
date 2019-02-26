@@ -25,7 +25,7 @@ class App extends Component {
 
 // Listen app
 router.listen(() => {
-  render(App, document.getElementById("root")); // render your applicatio here
+  render(App, document.getElementById("root")); // render your application here
 });
 ```
 
