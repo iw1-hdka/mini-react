@@ -22,7 +22,7 @@ class MovieItem extends Component {
         { href: !hasDetail ? `/#/movie/${movie.id}` : "", title: movie.title },
         h("img", {
           alt: movie.title,
-          src: `https://image.tmdb.org/t/p/w185${movie.poster_path}`
+          src: `https://image.tmdb.org/t/p/w500${movie.poster_path}`
         })
       )
     );
