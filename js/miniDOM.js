@@ -3,7 +3,7 @@ import { isStateLessComponent, isClass } from './utils.js';
 let vDOM;
 
 function appendProp(domElement, key, value) {
-    const allowedDOMAttributes = ['checked', 'value', 'className', 'max', 'href', 'dataSrc', 'alt', 'style', 'src'];
+    const allowedDOMAttributes = ['checked', 'value', 'className', 'max', 'href', 'dataSrc', 'alt', 'style', 'src', 'title'];
     // Handle DOM events
     if (typeof value === 'function' && key.startsWith('on')) {
         domElement.addEventListener(key.substring(2).toLowerCase(), value);

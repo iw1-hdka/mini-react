@@ -33,3 +33,19 @@ Do not forget class import
 ```
 import Router from "./router.js";
 ```
+
+3. Note to change demo
+
+In `index.html` change `script` like this:
+
+For demo1:
+
+```
+<script type="module" src="js/movies.js"></script>
+```
+
+For demo2:
+
+```
+<script type="module" src="js/app.js"></script>
+```

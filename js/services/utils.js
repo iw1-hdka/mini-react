@@ -1,8 +1,14 @@
 // --------------------------------
 //  Parse a url and break it into resource, id and verb
 // --------------------------------
-export function parseRequestURL (url) {
-    const [resource, id, verb] = (url.toLowerCase() || '/').split("/");
+export function parseRequestURL() {
+  let r = (location.hash.slice(1).toLowerCase() || "/").split("/");
 
-    return {resource, id, verb};
+  let request = {
+    resource: r[1],
+    id: r[2],
+    verb: r[3]
+  };
+
+  return request;
 }

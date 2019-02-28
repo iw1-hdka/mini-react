@@ -1,0 +1,115 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    background: #fefefe;
+}
+
+p {
+    font-size: 1em;
+    margin-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.movies {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 70px;
+    justify-content: center;
+}
+
+.movie img:hover {
+    cursor: pointer;
+}
+
+.movie {
+    height: 350px;
+}
+
+.movie a img {
+    width: 300px;
+    height: 350px;
+    transition: all 0.2s ease-in-out;
+}
+
+.movie.has-detail a img:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 11px rgba(33, 33, 33, .2);
+}
+
+.movie-detail {
+    width: 900px;
+    margin: 10px auto;
+}
+
+.entry-information {
+    display: flex;
+}
+
+.entry-information .thumbnail {
+    margin-right: 5px;
+}
+
+.entry-information .details {
+    padding: 0 20px;
+}
+
+.entry-information .data-information .movie-genre {
+    background: #dbdfe2;
+    padding: 10px;
+    margin-right: 5px;
+    color: #212529;
+}
+
+.entry-information .title {
+    color: #727272;
+}
+
+.entry-information .data-information {
+    display: flex;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+.entry-information .data-information span {
+    margin-right: 5px;
+}
+
+.entry-information .title-genre {
+    display: flex;
+    flex-direction: column;
+}
+
+.entry-information .title-genre .data-information {
+    margin-top: 10px;
+    margin-left: 0;
+}
+
+.overview .synopsis h2 {
+    padding: 10px 0;
+}
+
+.overview img {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 150px;
+}
+
+.overview .wrapper {
+    margin-top: 20px;
+}
+
+.overview .company-logo {
+    margin-right: 15px;
+    width: 200px;
+}
+
+.overview h3 {
+    margin: 10px 0;
+}
