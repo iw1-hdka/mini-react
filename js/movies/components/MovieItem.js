@@ -135,21 +135,25 @@ class MovieItem extends Component {
         h("h2", null, "Production Companies"),
         h(
           "p",
-          {className: "wrapper"},
+          { className: "wrapper" },
           ...movie.production_companies.map(production_company =>
-            h(
-              "span",
-              { className: "movie-production-company" },
-              h(
-                "div",
-                { className: "company-logo" },
-                h("img", {
-                  alt: production_company.name,
-                  title: production_company.name,
-                  src: `https://image.tmdb.org/t/p/w500${production_company.logo_path}`
-                })
-              )
-            )
+            production_company.logo_path
+              ? h(
+                  "span",
+                  { className: "movie-production-company" },
+                  h(
+                    "div",
+                    { className: "company-logo" },
+                    h("img", {
+                      alt: production_company.name,
+                      title: production_company.name,
+                      src: `https://image.tmdb.org/t/p/w500${
+                        production_company.logo_path
+                      }`
+                    })
+                  )
+                )
+              : h("div")
           )
         )
       )

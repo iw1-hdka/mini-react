@@ -43,8 +43,20 @@ class MovieItemDetail extends Component {
   render() {
     if (!this.state.movie) return h("div"); // quick fix async render
     let movie = this.state.movie;
-    console.log(movie)
-    return h("div", null, h(MovieItem, { movie: movie, hasDetail: true }));
+    return h(
+      "div",
+      null,
+      h(
+        "div",
+        null,
+        h(
+          "a",
+          { className: "back-button", href: "/#/" },
+          h("span", null, "Movies")
+        ),
+        h(MovieItem, { movie: movie, hasDetail: true })
+      )
+    );
   }
 }
 
