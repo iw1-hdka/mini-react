@@ -45,7 +45,7 @@ class Player extends Component {
             h(
                 'div',
                 null,
-                h('button', {onClick: this.punch.bind(this)}, 'Punch it!'),
+                h('button', {onClick: this.punch.bind(this)}, 'Punch it! {{ props.fighter.name }}'.interpolate(this)),
                 h('button', {onClick: this.kick.bind(this)}, 'Kick it!')
             )
         )
